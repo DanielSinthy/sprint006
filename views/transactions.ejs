@@ -1,0 +1,12 @@
+<h1>Transactions</h1>
+<form action="/transactions" method="post">
+    <input type="text" name="type" placeholder="Type (Income or Expense)" required />
+    <input type="number" name="amount" placeholder="Amount" required />
+    <input type="text" name="description" placeholder="Description" />
+    <button type="submit">Add Transaction</button>
+</form>
+<ul>
+    <% transactions.forEach(transaction => { %>
+        <li><%= transaction.type %>, Amount: $<%= transaction.amount %>, Description: <%= transaction.description || 'N/A' %></li>
+    <% }); %>
+</ul>
