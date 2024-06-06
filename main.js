@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
+const registrationRoutes = require('./routes/registrationRoutes');
 
 
 const app = express();
@@ -25,6 +26,8 @@ app.use(authRoutes);
 app.use(dashboardRoutes);
 
 app.use(transactionRoutes);
+
+app.use(registrationRoutes); 
 
 async function main() {
   try {
