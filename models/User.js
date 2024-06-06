@@ -1,12 +1,33 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
 
-const userSchema = new Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true }, 
-    email: { type: String, required: true, unique: true }
-});
+const { MongoClient, ObjectId } = require('mongodb');
+const url = 'mongodb://localhost:27017';
+const dbName = 'personalBudgetTracker';
+const client = new MongoClient(url);
 
-const User = mongoose.model('User', userSchema);
+async function createUser(userData) {
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection('users');
 
-module.exports = User;
+        const { username, email } = userData;
+        const existingUser = await collection.findOne({
+            $or: [{ username: username }, { email: email }]
+        });
+        if (existingUser) {
+            throw new Error('Username or email already exists.');
+        }
+
+   
+        const result = await collection.insertOne(userData);
+        return result;
+    } catch (error) {
+        throw error;
+    } finally {
+        await client.close();
+    }
+}
+
+module.exports = {
+    createUser
+};
