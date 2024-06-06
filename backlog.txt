@@ -19,3 +19,6 @@ Sprint03 - view templates and dynamic content
 Sprint 004
  -story001 - add and view transactions
  
+
+ sprint 006
+ - story001 Create user model for authentication and registration
