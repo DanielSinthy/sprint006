@@ -46,18 +46,12 @@ async function main() {
 
 main().catch(console.error);
 
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
-  res.send(`
-    <h1>Welcome to the Personal Budget Tracker App!</h1>
-    <form action="/login" method="post">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required><br><br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required><br><br>
-      <button type="submit">Login</button>
-    </form>
-  `);
+    res.render('login');
 });
+
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

@@ -6,6 +6,11 @@ const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url);
 const dbName = 'personalBudgetTracker';
 
+
+router.get('/login', (req, res) => {
+  res.render('login');  
+});
+
 router.post('/login', async (req, res) => {
     try {
         await client.connect();
